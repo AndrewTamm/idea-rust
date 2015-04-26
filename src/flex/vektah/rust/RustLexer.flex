@@ -21,19 +21,26 @@ import vektah.rust.psi.RustTokens;
 	private boolean doc_comment;
 %}
 
+SINGLE_QUOTE = \x27
+DOUBLE_QUOTE = \x22
+ESCAPE = \x5c
+NON_SINGLE_QUOTE = [^']
+NON_DOUBLE_QUOTE = [^\"]
+COMMON_ESCAPE = {ESCAPE} ([nrt0] | "x" {HEX_DIGIT} {2})
+UNICODE_ESCAPE = "u{" {HEX_DIGIT} {1,6} "}"
+CHAR_BODY = {NON_SINGLE_QUOTE} | ({ESCAPE} ({SINGLE_QUOTE} | {COMMON_ESCAPE} | {UNICODE_ESCAPE}))
+CHAR_LIT = {SINGLE_QUOTE} {CHAR_BODY} {SINGLE_QUOTE}
+STRING_BODY = {NON_DOUBLE_QUOTE} | ({ESCAPE} ({DOUBLE_QUOTE} | {COMMON_ESCAPE} | {UNICODE_ESCAPE}))
+STRING_LIT = {DOUBLE_QUOTE} {STRING_BODY}* {DOUBLE_QUOTE}
+
 WHITE_SPACE = [\ \t\n\r]
 XID_START = [a-zA-Z_]
 XID_CONTINUE = [a-zA-Z0-9_]
 HEX_DIGIT = [a-fA-F0-9]
-DOUBLE_QUOTE = \x22
-SINGLE_QUOTE = \x27
-COMMON_ESCAPE = ( [nrt0\n\r\\] | "x" {HEX_DIGIT} {2} | "u" {HEX_DIGIT} {4} | "U" {HEX_DIGIT} {8} )
-CHAR = {SINGLE_QUOTE} (( [^'\\] | "\\" ( {SINGLE_QUOTE} | {COMMON_ESCAPE}) ) | [^\x20-\x7E]{1,2}) {SINGLE_QUOTE}
-STRING = {DOUBLE_QUOTE} ( [^\"\\] | "\\" ( {DOUBLE_QUOTE} | {SINGLE_QUOTE} | {COMMON_ESCAPE}) )* {DOUBLE_QUOTE}
 NUM_SUFFIX = {INT_SUFFIX} | {FLOAT_SUFFIX}
-INT_SUFFIX = [ui] ( "8" | "16" | "32" | "64" )?
+INT_SUFFIX = [ui] ( "8" | "16" | "32" | "64" | "size")
 EXPONENT = [eE] [-+]? ([0-9] | "_" )+
-FLOAT_SUFFIX = ( {EXPONENT} | "." [0-9_]+ {EXPONENT}?)? ("f" ("32" | "64")?)?
+FLOAT_SUFFIX = ( {EXPONENT} | "." [0-9_]+ {EXPONENT}?)? ("f" ("32" | "64"))?
 DEC_LIT = [0-9] [0-9_]* {NUM_SUFFIX}?
 BIN_LIT = "0b" [01_]+ {INT_SUFFIX}?
 OCT_LIT = "0o" [0-7_]+ {INT_SUFFIX}?
@@ -93,8 +100,8 @@ HEX_LIT = "0x" [a-fA-F0-9_]+ {INT_SUFFIX}?
 	"///" $                                         { yybegin(YYINITIAL); return RustTokens.LINE_DOC_COMMENT; }
 	"//" ("!"|"/"[^/\n\r])[^\n\r]*                  { yybegin(YYINITIAL); return RustTokens.LINE_DOC_COMMENT; }
 	"//" [^\n\r]*                                   { yybegin(YYINITIAL); return RustTokens.LINE_COMMENT; }
-	{CHAR}                                          { yybegin(YYINITIAL); return RustTokens.CHAR_LIT; }
-	{STRING}                                        { yybegin(YYINITIAL); return RustTokens.STRING_LIT; }
+	{CHAR_LIT}                                      { yybegin(YYINITIAL); return RustTokens.CHAR_LIT; }
+	{STRING_LIT}                                    { yybegin(YYINITIAL); return RustTokens.STRING_LIT; }
 	"r" "#"* {DOUBLE_QUOTE}                         { yybegin(IN_RAW_STRING); start_raw_string = zzStartRead; raw_string_hashes = yytext().length() - 1; }
 
 	{BIN_LIT}                                       { yybegin(YYINITIAL); return RustTokens.BIN_LIT; }

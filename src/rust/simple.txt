@@ -308,7 +308,7 @@ Rust File
         RustExprTupleBodyImpl(EXPR_TUPLE_BODY)
           PsiElement(,)(',')
           RustExprValueImpl(EXPR_VALUE)
-            PsiElement(DEC_LIT)('4u')
+            PsiElement(DEC_LIT)('4u32')
           PsiElement(,)(',')
           RustExprValueImpl(EXPR_VALUE)
             PsiElement(true)('true')

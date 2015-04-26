@@ -45,7 +45,7 @@ pub fn main() {
     // Tuple expressions. They are not at all ambiguious.
     (0,);
     (0.0, 4.5);
-    ("a", 4u, true);
+    ("a", 4u32, true);
 
     // Tuple destructuring let with a statement block!
     let (_cap, _cap_name, _oldflags) = {

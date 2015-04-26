@@ -54,7 +54,7 @@ Rust File
         RustExprVectorImpl(EXPR_VECTOR)
           PsiElement([)('[')
           RustExprValueImpl(EXPR_VALUE)
-            PsiElement(DEC_LIT)('0i')
+            PsiElement(DEC_LIT)('0i8')
           PsiElement(;)(';')
           RustExprMultiplyImpl(EXPR_MULTIPLY)
             RustExprValueImpl(EXPR_VALUE)
