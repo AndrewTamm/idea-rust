@@ -62,13 +62,18 @@ public class RustSyntaxHighlighter extends SyntaxHighlighterBase {
 	@NotNull
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType type) {
-		if (type == KW_AS |
+		if (type == KW_ABSTRACT |
+			type == KW_ALIGNOF |
+			type == KW_AS |
+			type == KW_BECOME |
 			type == KW_BREAK |
 			type == KW_CRATE |
+			type == KW_DO |
 			type == KW_ELSE |
 			type == KW_ENUM |
 			type == KW_EXTERN |
 			type == KW_FALSE |
+			type == KW_FINAL |
 			type == KW_FN |
 			type == KW_FOR |
 			type == KW_IF |
@@ -78,22 +83,31 @@ public class RustSyntaxHighlighter extends SyntaxHighlighterBase {
 			type == KW_LOOP |
 			type == KW_MATCH |
 			type == KW_MOD |
+			type == KW_MOVE |
 			type == KW_MUT |
+			type == KW_OFFSETOF |
+			type == KW_OVERRIDE |
 			type == KW_PRIV |
 			type == KW_PROC |
 			type == KW_MOVE |
 			type == KW_PUB |
+			type == KW_PURE |
 			type == KW_REF |
 			type == KW_RETURN |
+			type == KW_SELF_IMPLEMENTOR |
 			type == KW_SELF |
+			type == KW_SIZEOF |
 			type == KW_STATIC |
 			type == KW_STRUCT |
 			type == KW_SUPER |
 			type == KW_TRAIT |
 			type == KW_TRUE |
 			type == KW_TYPE |
+			type == KW_TYPEOF |
 			type == KW_UNSAFE |
+			type == KW_UNSIZED |
 			type == KW_USE |
+			type == KW_VIRTUAL |
 			type == KW_WHILE |
 			type == KW_CONTINUE |
 			type == KW_BOX |

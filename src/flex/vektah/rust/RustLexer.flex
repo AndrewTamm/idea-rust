@@ -55,14 +55,19 @@ HEX_LIT = "0x" [a-fA-F0-9_]+ {INT_SUFFIX}?
 	{WHITE_SPACE}+                                  { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
 
 	// Keywords
+	"abstract"                                      { yybegin(YYINITIAL); return RustTokens.KW_ABSTRACT; }
+	"alignof"                                       { yybegin(YYINITIAL); return RustTokens.KW_ALIGNOF; }
 	"as"                                            { yybegin(YYINITIAL); return RustTokens.KW_AS; }
+	"become"                                        { yybegin(YYINITIAL); return RustTokens.KW_BECOME; }
 	"break"                                         { yybegin(YYINITIAL); return RustTokens.KW_BREAK; }
 	"const"                                         { yybegin(YYINITIAL); return RustTokens.KW_CONST; }
 	"crate"                                         { yybegin(YYINITIAL); return RustTokens.KW_CRATE; }
+	"do"                                            { yybegin(YYINITIAL); return RustTokens.KW_DO; }
 	"else"                                          { yybegin(YYINITIAL); return RustTokens.KW_ELSE; }
 	"enum"                                          { yybegin(YYINITIAL); return RustTokens.KW_ENUM; }
 	"extern"                                        { yybegin(YYINITIAL); return RustTokens.KW_EXTERN; }
 	"false"                                         { yybegin(YYINITIAL); return RustTokens.KW_FALSE; }
+	"final"                                         { yybegin(YYINITIAL); return RustTokens.KW_FINAL; }
 	"fn"                                            { yybegin(YYINITIAL); return RustTokens.KW_FN; }
 	"for"                                           { yybegin(YYINITIAL); return RustTokens.KW_FOR; }
 	"if"                                            { yybegin(YYINITIAL); return RustTokens.KW_IF; }
@@ -72,22 +77,31 @@ HEX_LIT = "0x" [a-fA-F0-9_]+ {INT_SUFFIX}?
 	"loop"                                          { yybegin(YYINITIAL); return RustTokens.KW_LOOP; }
 	"match"                                         { yybegin(YYINITIAL); return RustTokens.KW_MATCH; }
 	"mod"                                           { yybegin(YYINITIAL); return RustTokens.KW_MOD; }
+	"move"                                          { yybegin(YYINITIAL); return RustTokens.KW_MOVE; }
 	"mut"                                           { yybegin(YYINITIAL); return RustTokens.KW_MUT; }
+	"offsetof"                                      { yybegin(YYINITIAL); return RustTokens.KW_OFFSETOF; }
+	"override"                                      { yybegin(YYINITIAL); return RustTokens.KW_OVERRIDE; }
 	"priv"                                          { yybegin(YYINITIAL); return RustTokens.KW_PRIV; }
 	"proc"                                          { yybegin(YYINITIAL); return RustTokens.KW_PROC; }
 	"move"                                          { yybegin(YYINITIAL); return RustTokens.KW_MOVE; }
 	"pub"                                           { yybegin(YYINITIAL); return RustTokens.KW_PUB; }
+	"pure"                                          { yybegin(YYINITIAL); return RustTokens.KW_PURE; }
 	"ref"                                           { yybegin(YYINITIAL); return RustTokens.KW_REF; }
 	"return"                                        { yybegin(YYINITIAL); return RustTokens.KW_RETURN; }
+	"Self"                                          { yybegin(YYINITIAL); return RustTokens.KW_SELF_IMPLEMENTOR; }
 	"self"                                          { yybegin(YYINITIAL); return RustTokens.KW_SELF; }
+	"sizeof"                                        { yybegin(YYINITIAL); return RustTokens.KW_SIZEOF; }
 	"static"                                        { yybegin(YYINITIAL); return RustTokens.KW_STATIC; }
 	"struct"                                        { yybegin(YYINITIAL); return RustTokens.KW_STRUCT; }
 	"super"                                         { yybegin(YYINITIAL); return RustTokens.KW_SUPER; }
 	"true"                                          { yybegin(YYINITIAL); return RustTokens.KW_TRUE; }
 	"trait"                                         { yybegin(YYINITIAL); return RustTokens.KW_TRAIT; }
 	"type"                                          { yybegin(YYINITIAL); return RustTokens.KW_TYPE; }
+	"typeof"                                        { yybegin(YYINITIAL); return RustTokens.KW_TYPEOF; }
 	"unsafe"                                        { yybegin(YYINITIAL); return RustTokens.KW_UNSAFE; }
+	"unsized"                                       { yybegin(YYINITIAL); return RustTokens.KW_UNSIZED; }
 	"use"                                           { yybegin(YYINITIAL); return RustTokens.KW_USE; }
+	"virtual"                                       { yybegin(YYINITIAL); return RustTokens.KW_VIRTUAL; }
 	"while"                                         { yybegin(YYINITIAL); return RustTokens.KW_WHILE; }
 	"continue"                                      { yybegin(YYINITIAL); return RustTokens.KW_CONTINUE; }
 	"box"                                           { yybegin(YYINITIAL); return RustTokens.KW_BOX; }
@@ -144,7 +158,6 @@ HEX_LIT = "0x" [a-fA-F0-9_]+ {INT_SUFFIX}?
 	">"                                             { yybegin(YYINITIAL); return RustTokens.GREATER_THAN; }
 
 	"!"                                             { yybegin(YYINITIAL); return RustTokens.NOT; }
-	"~"                                             { yybegin(YYINITIAL); return RustTokens.BOX; }
 	"@"                                             { yybegin(YYINITIAL); return RustTokens.AT; }
 	"'"                                             { yybegin(YYINITIAL); return RustTokens.SINGLE_QUOTE; }
 	"$"                                             { yybegin(YYINITIAL); return RustTokens.DOLLAR; }
